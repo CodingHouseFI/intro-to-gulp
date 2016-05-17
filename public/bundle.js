@@ -1,6 +1,0 @@
-console.log('this is a.js')
-console.log('this is b.js')
-console.log('this is a.js')
-console.log('this is b.js')
-console.log('THIS IS c.js!!!!!!!')
-console.log('THIS IS c.js!!!!!!!')
