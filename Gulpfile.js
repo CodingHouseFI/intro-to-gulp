@@ -7,6 +7,7 @@ var nodemon = require('gulp-nodemon');
 var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var annotate = require('gulp-ng-annotate');
+var sourcemaps = require('gulp-sourcemaps');
 
 
 // gulp.task  - define a task
@@ -14,7 +15,6 @@ var annotate = require('gulp-ng-annotate');
 // gulp.dest  - output files
 // gulp.watch - watch files/directories for changes
 // *.pipe     - chain actions together
-
 
 gulp.task('default', ['js', 'css', 'watch', 'serve']);
 
@@ -30,17 +30,18 @@ gulp.task('serve', function() {
 
 gulp.task('js', function() {
   return gulp.src('./client/js/**/*.js')
+    .pipe(sourcemaps.init())
     .pipe(concat('bundle.js'))
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(annotate())
     .pipe(uglify())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('./public/js'));
 });
 
 gulp.task('watch.js', function() {
   return gulp.watch('./client/js/**/*.js', ['js'])
 });
-
 
 /////// CSS /////////
 
@@ -56,5 +57,4 @@ gulp.task('watch.css', function() {
 gulp.task('clean.css', function() {
   return del('./public/css');
 });
-
 

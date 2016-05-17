@@ -1,0 +1,21 @@
+{
+  "name": "newgulptest",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Cade Nichols <cade@cadenichols.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/CodingHouseFI/intro-to-gulp",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5"
+  }
+}
