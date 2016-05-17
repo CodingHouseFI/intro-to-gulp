@@ -8,7 +8,7 @@ var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var annotate = require('gulp-ng-annotate');
 var sourcemaps = require('gulp-sourcemaps');
-
+var eslint = require('gulp-eslint');
 
 // gulp.task  - define a task
 // gulp.src   - (source) input files
@@ -16,7 +16,9 @@ var sourcemaps = require('gulp-sourcemaps');
 // gulp.watch - watch files/directories for changes
 // *.pipe     - chain actions together
 
-gulp.task('default', ['js', 'css', 'watch', 'serve']);
+gulp.task('default', ['build', 'watch', 'serve']);
+
+gulp.task('build', ['js', 'css']);
 
 gulp.task('watch', ['watch.js', 'watch.css']);
 
@@ -25,6 +27,23 @@ gulp.task('serve', function() {
     ignore: ['client', 'public', 'Gulpfile.js']
   });
 });
+
+gulp.task('watch.lint', function() {
+  return gulp.watch('./**/*.js', ['lint'])
+});
+
+gulp.task('lint', function() {
+  return gulp.src([
+    './**/*.js',
+    '!bundle.js',
+    '!Gulpfile.js',
+    '!./node_modules/**',
+    '!./public/bower_components/**'
+  ])
+  .pipe(eslint())
+  .pipe(eslint.format());
+})
+
 
 /////// JAVASCRIPT /////////
 
@@ -43,7 +62,7 @@ gulp.task('watch.js', function() {
   return gulp.watch('./client/js/**/*.js', ['js'])
 });
 
-/////// CSS /////////
+//////////// CSS //////////////
 
 gulp.task('css', ['clean.css'], function() {
   return gulp.src('./client/css/**/*.css')

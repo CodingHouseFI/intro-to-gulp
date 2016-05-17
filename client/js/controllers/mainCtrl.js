@@ -7,5 +7,5 @@ app.controller('mainCtrl', function($scope) {
     alert('ALERT!');
     console.log('this:', this);
   };
-
 });
+
