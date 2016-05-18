@@ -8,4 +8,3 @@ app.controller('mainCtrl', function($scope) {
     console.log('this:', this);
   };
 });
-
